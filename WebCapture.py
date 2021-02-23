@@ -13,6 +13,7 @@ def WebCrawMain(title_site):
 		wd.get(title_site[i+1])
 		time.sleep(3)
 		im = ImageGrab.grab(bbox=(60, 50, 1140, 1040))
+		#driver.save_screenshot(f'.\\Capture2\\Capture{i+1}.png')
 		im.save(f'.\\Capture2\\Capture{i+1}.png')
 	wd.quit()
     
