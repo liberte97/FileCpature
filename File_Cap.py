@@ -14,62 +14,78 @@ Filecpature
 
 4. title_num = len(title_name)
 '''
+def ex_file(title_num, title_name):
+    for i in range(title_num):
+        if os.path.exists(f".\\File\\{title_name[i+1]}"):
+            if '.zip' in title_name[i+1] or '.rar' in title_name[i+1]:
+                # 띄어쓰기 문자열이 있을 수 있으니 "test"를 위해 \"\" 
+                p = subprocess.Popen('bandizip.exe \".\\File\\%s\"' %(title_name[i+1]))
+                #p = subprocess.Popen(f'bandizip.exe \"E:\\CaptureTest\\ZipFile\\{title_name[i+1]}\"')
+                time.sleep(0.5)
+                # 키보드 조정
+                pyautogui.press('down')
+                time.sleep(1)
+                # 좌표 설정 하기
+                im = ImageGrab.grab(bbox=(686, 283, 1791, 1015))
+                # Pic 폴더 만든 다음에 하기
+                im.save(f'.\\Picture\\{i+1}.{title_name[i+1]}.png')
+                time.sleep(0.5)
+                p.kill()
 
-for i in range(title_num):
-    if os.path.exists(f".\\File\\{title_name[i+1]}"):
-        if '.zip' in title_name[i+1] or '.rar' in title_name[i+1]:
-            # 띄어쓰기 문자열이 있을 수 있으니 "test"를 위해 \"\" 
-            p = subprocess.Popen('bandizip.exe \".\\File\\%s\"' %(title_name[i+1]))
-            #p = subprocess.Popen(f'bandizip.exe \"E:\\CaptureTest\\ZipFile\\{title_name[i+1]}\"')
-            time.sleep(0.5)
-            # 키보드 조정
-            pyautogui.press('down')
-            time.sleep(1)
-            # 좌표 설정 하기
-            im = ImageGrab.grab(bbox=(686, 283, 1791, 1015))
-            # Pic 폴더 만든 다음에 하기
-            im.save(f'.\\Picture\\{i+1}.{title_name[i+1]}.png')
-            time.sleep(0.5)
-            p.kill()
+            if '.txt' in title_name[i+1]:
+                p = subprocess.Popen('notepad.exe \".\\File\\%s\"' %(title_name[i+1]))
+                #p = subprocess.Popen(f'notepad.exe \".\\ZipFile\\{title_name[i+1]}\"')
 
-        if '.txt' in title_name[i+1]:
-            p = subprocess.Popen('notepad.exe \".\\File\\%s\"' %(title_name[i+1]))
-            #p = subprocess.Popen(f'notepad.exe \".\\ZipFile\\{title_name[i+1]}\"')
+                time.sleep(1)
+                # 좌표 설정 하기
+                im = ImageGrab.grab(bbox=(686, 283, 1791, 1015))
+                # Pic 폴더 만든 다음에 하기
+                im.save(f'.\\Picture\\{i+1}.{title_name[i+1]}.png')
+                time.sleep(0.5)
+                p.kill()
 
-            time.sleep(1)
-            # 좌표 설정 하기
-            im = ImageGrab.grab(bbox=(686, 283, 1791, 1015))
-            # Pic 폴더 만든 다음에 하기
-            im.save(f'.\\Picture\\{i+1}.{title_name[i+1]}.png')
-            time.sleep(0.5)
-            p.kill()
+            if '.mp4' in title_name[i+1] or '.mkv' in title_name[i+1]:
+                print(title_name[i+1])
+                p = subprocess.Popen('explorer \".\\File\\%s\"' %(title_name[i+1]))
+                #p = subprocess.Popen(f'bandizip.exe \".\\ZipFile\\{title_name[i+1]}\"')
+                # 동영상 넘기기위해 8번 정도 클릭해야 오프닝 생략 -> 동영상 내 설정에서 오른쪽 한 번에 150초로 설정
+                time.sleep(3)
+                pyautogui.press('right')
+                time.sleep(2)
+                # 좌표 설정 하기
+                im = ImageGrab.grab(bbox=(686, 283, 1791, 1015))
+                # Pic 폴더 만든 다음에 하기
+                im.save(f'.\\Picture\\{i+1}.{title_name[i+1]}.png')
+                time.sleep(0.5)
+                os.system('taskkill /f /im PotPlayer64.exe')            
 
-        if '.mp4' in title_name[i+1] or '.mkv' in title_name[i+1]:
-            print(title_name[i+1])
-            p = subprocess.Popen('explorer \".\\File\\%s\"' %(title_name[i+1]))
-            #p = subprocess.Popen(f'bandizip.exe \".\\ZipFile\\{title_name[i+1]}\"')
-            # 동영상 넘기기위해 8번 정도 클릭해야 오프닝 생략 -> 동영상 내 설정에서 오른쪽 한 번에 150초로 설정
-            time.sleep(3)
-            pyautogui.press('right')
-            time.sleep(2)
-            # 좌표 설정 하기
-            im = ImageGrab.grab(bbox=(686, 283, 1791, 1015))
-            # Pic 폴더 만든 다음에 하기
-            im.save(f'.\\Picture\\{i+1}.{title_name[i+1]}.png')
-            time.sleep(0.5)
-            os.system('taskkill /f /im PotPlayer64.exe')            
+            if '.docx' in title_name[i+1]:
+                p = subprocess.Popen('explorer \".\\File\\%s\"' %(title_name[i+1]))
+                #p = subprocess.Popen(f'bandizip.exe \".\\ZipFile\\{title_name[i+1]}\"')
+                time.sleep(2)
+                # 좌표 설정 하기
+                im = ImageGrab.grab(bbox=(686, 283, 1791, 1015))
+                # Pic 폴더 만든 다음에 하기
+                im.save(f'.\\Picture\\{i+1}.{title_name[i+1]}.png')
+                time.sleep(0.5)
+                os.system('taskkill /f /im WINWORD.EXE')  
+        else:
+            document.add_heading(f"{str(i+1)}.{title_name[i+1]}", 1)
 
-        if '.docx' in title_name[i+1]:
-            p = subprocess.Popen('explorer \".\\File\\%s\"' %(title_name[i+1]))
-            #p = subprocess.Popen(f'bandizip.exe \".\\ZipFile\\{title_name[i+1]}\"')
-            time.sleep(2)
-            # 좌표 설정 하기
-            im = ImageGrab.grab(bbox=(686, 283, 1791, 1015))
-            # Pic 폴더 만든 다음에 하기
-            im.save(f'.\\Picture\\{i+1}.{title_name[i+1]}.png')
-            time.sleep(0.5)
-            os.system('taskkill /f /im WINWORD.EXE')  
-    else:
-        document.add_heading(f"{str(i+1)}.{title_name[i+1]}", 1)
+    document.save('.\\exception.docx')
 
-document.save('.\\exception.docx')
+def get_title(path):
+    # 엑셀 읽은 다음 전체 길이 및 이름 return
+    data = pd.read_excel(path, engine="openpyxl")
+    title_name = {}
+    title_num  = len(data.index)
+    # 행의 이름이 title인지 확인할 것!
+    for i in range(title_num):
+        title_name[i+1] = data.title[i]
+    print(title_num)
+    return title_num, title_name
+
+if __name__ == "__main__":
+    path = '.\\test.xlsx'
+    title_num, title_name = get_title(path)
+    ex_file(title_num, title_name)
