@@ -1,3 +1,10 @@
+'''
+조건 및 고려사항
+1. 팝업창이 뜨는 경우
+2. URL 구조인 경우
+3. URL1, URL2를 구분지어 캡처
+'''
+
 import pandas as pd
 from selenium import webdriver
 import time, pyautogui
