@@ -1,0 +1,25 @@
+'''
+판다스 모듈을 이용하여 엑셀 내 원하는 값 여러개 찾기
+
+원하는 값: 여러개
+
+'''
+
+import pandas as pd
+import numpy as np
+
+list_r = []
+
+df = pd.read_excel("Capture.xlsx", engine="openpyxl")
+
+test = []
+
+for i in list_r:
+	data = df[df['idx'] == i].values.tolist()
+  # 해당 데이터는 하나의 조건에 일치하는 행이 하나라는 가정으로 작성됨
+  # 만약 2개 이상일 경우 enumerate를 써서 data[idx] 추천
+	test.append(data[0])
+
+df_w = pd.DataFrame(test)
+print(pd.DataFrame(test))
+df_w.to_excel(excel_writer="Result(링크).xlsx", sheet_name = '캡처목록', index = False)
